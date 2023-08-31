@@ -16,7 +16,7 @@ import type {
   WithTimingConfig,
 } from 'react-native-reanimated';
 import type { GESTURE_SOURCE } from './constants';
-
+import type { FlashList } from '@shopify/flash-list';
 //#region Methods
 export interface BottomSheetMethods {
   /**
@@ -107,7 +107,7 @@ export interface BottomSheetVariables {
 }
 
 //#region scrollables
-export type Scrollable = FlatList | ScrollView | SectionList;
+export type Scrollable = FlatList | FlashList | ScrollView | SectionList;
 export type ScrollableRef = {
   id: number;
   node: React.RefObject<Scrollable>;
@@ -177,7 +177,9 @@ type ScrollEventHandlerCallbackType<C = any> = (
 
 export type ScrollEventsHandlersHookType = (
   ref: React.RefObject<Scrollable>,
-  contentOffsetY: SharedValue<number>
+  contentOffsetY: SharedValue<number>,
+  scrollBuffer: number | undefined,
+  preserveScrollMomentum: boolean | undefined
 ) => {
   handleOnScroll?: ScrollEventHandlerCallbackType;
   handleOnBeginDrag?: ScrollEventHandlerCallbackType;
